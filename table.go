@@ -249,9 +249,9 @@ func (t *Table) AppendBulk(rows [][]string) {
 	}
 }
 
-// Print line based on row width
 func (t Table) printLine(nl bool) {
 	fmt.Fprint(t.out, t.pCenter)
+	fmt.Fprint(t.out, "\033[2m")
 	for i := 0; i < len(t.cs); i++ {
 		v := t.cs[i]
 		fmt.Fprintf(t.out, "%s%s%s%s",
@@ -260,8 +260,9 @@ func (t Table) printLine(nl bool) {
 			t.pRow,
 			t.pCenter)
 	}
+	fmt.Fprint(t.out, "\033[0m")
 	if nl {
-		fmt.Fprint(t.out, t.newLine)
+		fmt.Fprintln(t.out)
 	}
 }
 
